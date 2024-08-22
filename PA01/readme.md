@@ -10,12 +10,14 @@
 ![ifconfig_02](./screenshots/ifconfig_02.png)
 these all are the network interfaces on my device
 - `en0` is the primary WiFi interface of the device, which can be cross-checked from macbook's own internal settings like follows:![wifi_interface](./screenshots/wifi_interface.png)![ifconfig_en0](./screenshots/ifconfig_en0.png)
- The red-rectangle of the above image shows the `ipv4` address of the `en0` network interface, which is `192.168.42.154`. (note that the hardware address don't match, as by default macOS randomises the mac address for every WiFi network.) This again can be cross-checked by internal setting of macbook as follows:![wifi_laptopS](./screenshots/wifi_laptopS.png)
+ The red-rectangle of the above image shows the `ipv4` address of the `en0` network interface, which is `192.168.42.154`. (note that the hardware address don't match, as by default macOS randomises the mac address for every WiFi network.) This again can be cross-checked by internal setting of macbook as follows:
+ ![wifi_laptopS](./screenshots/wifi_laptopS.png)
 - some other interfaces that we can see are `lo0` which is the loopback interface, `en1` which is the Thunderbolt 1 interface, `en2` which is the Thunderbolt 2 interface, `en3` which is the Ethernet interface, `bridge0` which is the thunderbolt bridge, and many more.
 
 #### 1.b Go to the webpage `https://www.whatismyip.com` and find out what IP is shown for your machine. Are they identical or different? Why?
 Below is the public IP address of my device as shown on the website `https://www.whatismyip.com`:
 ![public_ip](./screenshots/public_ip.png)
+
 As we can see, the IP address - `103.25.231.125` is different from the IP address of the `en0` network interface - `192.168.42.154`. This is because the `en0` network interface is a private IP address, which is assigned by the router to the device on the local network. The public IP address is the address of the router, which is assigned by the ISP. The router then assigns private IP addresses to the devices on the local network. The public IP address is used to identify the device on the internet, while the private IP address is used to identify the device on the local network. This translation is explained by a process called **NAT - Network Address Translation**.
 
 ### 2. `ifconfig` continued
