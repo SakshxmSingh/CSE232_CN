@@ -9,7 +9,9 @@
 ![ifconfig_01](./screenshots/ifconfig_01.png)
 ![ifconfig_02](./screenshots/ifconfig_02.png)
 these all are the network interfaces on my device
-- `en0` is the primary WiFi interface of the device, which can be cross-checked from macbook's own internal settings like follows:![wifi_interface](./screenshots/wifi_interface.png)![ifconfig_en0](./screenshots/ifconfig_en0.png)
+- `en0` is the primary WiFi interface of the device, which can be cross-checked from macbook's own internal settings like follows:
+  ![wifi_interface](./screenshots/wifi_interface.png)
+  ![ifconfig_en0](./screenshots/ifconfig_en0.png)
  The red-rectangle of the above image shows the `ipv4` address of the `en0` network interface, which is `192.168.42.154`. (note that the hardware address don't match, as by default macOS randomises the mac address for every WiFi network.) This again can be cross-checked by internal setting of macbook as follows:
  ![wifi_laptopS](./screenshots/wifi_laptopS.png)
 - some other interfaces that we can see are `lo0` which is the loopback interface, `en1` which is the Thunderbolt 1 interface, `en2` which is the Thunderbolt 2 interface, `en3` which is the Ethernet interface, `bridge0` which is the thunderbolt bridge, and many more.
@@ -27,7 +29,7 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
   sudo ifconfig <interface_name> <new_ip_addr>
   ```
   where `<interface_name>` is the name of the interface whose IP address is to be changed, and `<new_ip_addr>` is the new IP address to be assigned to the interface.
-- so for my device to a random IP address, let's say - `192.168.100.100`, I have to do
+- so for my device, changing to a random IP address, let's say - `192.168.100.100`, I have to do
   ```bash
   sudo ifconfig en0 192.168.100.100
   ```
@@ -47,14 +49,16 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
   ```bash
   nc -l <port_num>
   ```
-    where `<port_num>` is the port number on which the server will listen for incoming connections. ![netcat_01](./screenshots/netcat_01.png)
+    where `<port_num>` is the port number on which the server will listen for incoming connections. 
+    ![netcat_01](./screenshots/netcat_01.png)
 - the client can be started on the localhost by running the command
   ```bash
   nc -v <host_ip> <port_num>
   ```
     where `<host_ip>` is the IP address of the host machine, and `<port_num>` is the port number on which the server is listening, here the `host_ip` will be `127.0.0.1` (localhost).
     ![netcat_02](./screenshots/netcat_02.png)
-- the connection is established between the server and the client, and the client can send messages to the server, which will be displayed on the server terminal. ![netcat_03](./screenshots/netcat_03.png)
+- the connection is established between the server and the client, and the client can send messages to the server, which will be displayed on the server terminal. 
+  ![netcat_03](./screenshots/netcat_03.png)
   - ##### sending a message from the client to the server
     ![netcat_04](./screenshots/netcat_04.png)
   - ##### receiving the message on the server
@@ -63,16 +67,19 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
     ![netcat_06](./screenshots/netcat_06.png)
   - ##### receiving the message on the client
     ![netcat_07](./screenshots/netcat_07.png)
-- the connection can be closed by pressing `Ctrl+C` on the server terminal. ![netcat_08](./screenshots/netcat_08.png)
+- the connection can be closed by pressing `Ctrl+C` on the server or client terminal. 
+  ![netcat_08](./screenshots/netcat_08.png)
 
 #### 3.b Determine the state of this TCP connection(s) at the client node. Put a screenshot.
 - the state of the TCP connection can be determined by using the option `-z` with the `nc` command, which will scan the port for listening services. Using this command won't establish a connection, but it will show the state of the connection.
   ```bash
   nc -zv <host_ip> <port_num>
   ```
-    where `<host_ip>` is the IP address of the host machine, and `<port_num>` is the port number on which the server is listening. ![netcat_09](./screenshots/netcat_09.png)
+    where `<host_ip>` is the IP address of the host machine, and `<port_num>` is the port number on which the server is listening. 
+    ![netcat_09](./screenshots/netcat_09.png)
     the message on client terminal shows that the connection is established and the port is open.
-- if no listening service found, it will show an error message, which can be because the server is not running or the port number is incorrect. ![netcat_10](./screenshots/netcat_10.png)
+- if no listening service found, it will show an error message, which can be because the server is not running or the port number is incorrect. 
+  ![netcat_10](./screenshots/netcat_10.png)
   
 
 ### 4. `nslookup` command
@@ -94,7 +101,8 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
     ```bash
     nslookup <domain_name> <dns_server>
     ```
-    where `<domain_name>` is the domain name for which the DNS records are to be queried, and `<dns_server>` is the authoritative DNS server for the domain. ![nslookup_03](./screenshots/nslookup_03.png)
+    where `<domain_name>` is the domain name for which the DNS records are to be queried, and `<dns_server>` is the authoritative DNS server for the domain. 
+    ![nslookup_03](./screenshots/nslookup_03.png)
     here we can see that the authoritative result for the domain `google.in` is `142.250.195.4`.
 
 #### 4.b Find out the time to live for any website on the local DNS. Put a screenshot. Explain in words (with unit) after how much time this entry would expire from the local DNS server.
@@ -103,9 +111,10 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
   ```bash
     nslookup -debug <domain_name>
   ```
-    where `<domain_name>` is the domain name for which the DNS records are to be queried. ![nslookup_04](./screenshots/nslookup_04.png)
+    where `<domain_name>` is the domain name for which the DNS records are to be queried. 
+    ![nslookup_04](./screenshots/nslookup_04.png)
     here we can see that the TTL for the domain `google.in` is `300` seconds, which means that the DNS record will expire from the local DNS server after `300` seconds, or `5` minutes.
-    for `iiitd.ac.in`, the TTL is `86400` seconds, which means that the DNS record will expire from the local DNS server after `86400` seconds, or `1` day.
+    For `iiitd.ac.in`, the TTL is `86400` seconds, which means that the DNS record will expire from the local DNS server after `86400` seconds, or `1` day.
     ![nslookup_05](./screenshots/nslookup_05.png)
 
 ### 5. `traceroute` and `ping` commands
@@ -149,12 +158,13 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
 
 #### 5.c Add up the ping latency of all the intermediate hosts obtained in (a) and compare with (b). Are they matching, explain?
 - the total latency of the intermediate hosts obtained in (a) is `66.720 ms`, and the average latency of the 50 packets sent to `google.in` is `17.137 ms`.
-- this change in latencies can be explained by two reasons, which are as follows:
+- this change in latencies can be explained by three reasons, which are as follows:
+  - **roundtrip from each intermediate host** : the `traceroute` command calculates the latency to each intermediate host and back to the source host, while the `ping` command calculates the round-trip time for each packet to the destination host. `traceroute` thus cumulates the latency of each intermediate host, causing the total latency of the intermediate hosts to be higher than the average latency of the `ping` command.
   - **smaller amount of packets sent** : the `ping` command sends 50 packets, which is much larger than the number of packets sent by the `traceroute` command, which sends only 3 packets. The average latency of the `ping` command is calculated over a larger number of packets, which gives a more accurate representation of the latency. The `traceroute` command, on the other hand, sends only 3 packets, which may not be representative of the actual latency. This is also seen in the `stddev` in `ping` command, which is `24.396 ms`, which is quite large, indicating that the latency values are spread out over a large range.
-  - **inconsitencies in the network** : the latency values obtained by the `traceroute` command are the average of the three attempts made to connect to the host. These values may vary due to network congestion, packet loss, or other factors. The latency values obtained by the `ping` command are the round-trip time for each packet, which may also vary due to network conditions. These inconsistencies in the network can cause the latency values obtained by the two commands to be different.
+  - **inconsitencies in the network** : the latency values obtained by the `traceroute` command are the average of the three attempts made to connect to the host. These values may vary due to network congestion, packet loss, or other factors. The latency values obtained by the `ping` command are also affected by these factors, but the average latency smoothens out the effects of these factors, giving a more accurate representation of the latency.
 
 #### 5.d Take the maximum ping latency amongst the intermediate hosts (in (a)) and compare it with (b). Are they matching, explain?
-- the maximum latency of the intermediate hosts obtained in (a) is `32.734 ms`, and the average latency of the 50 packets sent to `google.in` is `17.137 ms`.
+- the maximum latency of the intermediate hosts obtained in (a) is `32.734 ms` in jump 3, and the average latency of the 50 packets sent to `google.in` is `17.137 ms`.
 - the maximum latency of the intermediate hosts is higher than the average latency of the `ping` command, which can be explained by:
   - **network congestion** : the maximum latency of the intermediate hosts is the maximum latency observed during the three attempts made by the `traceroute` command. This maximum latency may be due to network congestion, packet loss, or other factors that cause delays in the network. The average latency of the `ping` command, on the other hand, is the average round-trip time for each packet, which smoothens out the effects of network congestion and other factors.
 
@@ -174,7 +184,7 @@ As we can see, the IP address - `103.25.231.125` is different from the IP addres
   ```
   the number of hops between `stanford.edu` and `google.in` is `7` hops, which is quite a significant difference (nearly as much as the number of hops to `google.in`).
 
-#### Can you explain the reason for the latency difference between google.in and stanford.edu (see (b) & (f))?
+#### 5.h Can you explain the reason for the latency difference between google.in and stanford.edu (see (b) & (f))?
 - the latency difference between `google.in` and `stanford.edu` can be explained by the following reasons:
   - **geographical distance** : the physical distance between the source and destination hosts can affect the latency of the packets. `google.in` is a domain hosted in India, while `stanford.edu` is a domain hosted in the United States. The packets have to travel a longer distance to reach `stanford.edu`, which can increase the latency.
   - **number of intermediate hosts** : the number of intermediate hosts between the source and destination hosts can also affect the latency. `stanford.edu` has more intermediate hosts than `google.in`, which can increase the latency as the packets have to pass through more routers and networks.
